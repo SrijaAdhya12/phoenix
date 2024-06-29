@@ -22,6 +22,6 @@ export const getComments = (req, res) => {
 		]
         res.status(200).json(comments)
     } catch (error) {
-       res.status(400).json(comments)
+       res.status(500).json(comments)
     }
 }
