@@ -50,7 +50,7 @@ export const createComment = (req, res) => {
 			res.status(403).json({ error: 'Comment already exits with this id' })
 		} else {
 			comments.push({ id, message, userId, postId })
-			res.status(201).json(comment)
+			res.status(200).json(comment)
 			
 		}
 	} catch (error) {

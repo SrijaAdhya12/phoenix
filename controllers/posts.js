@@ -1,37 +1,18 @@
-const posts = [
-	{
-		id: '100',
-		title: 'Vacation',
-		authorId: '0b1234',
-	},
-	{
-		id: '101',
-		title: 'Trip',
-		authorId: '0b1234',
-	},
-	{
-		id: '102',
-		title: 'College',
-		authorId: '0b1234',
-	},
-]
+import Posts from '../models/post.js'
 
-export const getPost = (req, res) => {
+export const getPost = async (req, res) => {
 	const { id } = req.params
 	try {
-		const post = posts.find((post) => post.id == id)
-		if (post) {
-			res.status(200).json(post)
-		} else {
-			res.status(404).json({ error: 'Post not found' })
-		}
-	} catch (error) {
+		const post = await Posts.findById(id)
+		res.status(200).json(post)
+		}catch (error) {
 		res.status(500).json({ error: error.message })
 	}
 }
 
-export const getPosts = (req, res) => {
+export const getPosts = async (_, res) => {
 	try {
+		const posts = await Posts.find()
 		res.status(200).json(posts)
 	} catch (error) {
 		res.status(500).json({ error: error.message })
@@ -40,22 +21,17 @@ export const getPosts = (req, res) => {
 
 //Create Post
 
-export const createPost = (req, res) => {
+export const createPost = async (req, res) => {
 	const post = req.body
 	try {
-		const { id, title, authorId } = post
-		const found = posts.find((post) => post.id == id)
-		if (found) {
-			res.status(403).json({ error: 'Post already exits with this id' })
-		} else {
-			posts.push({id , title , authorId})
-			res.status(201).json(post)
-		}
+		const newPost = new Posts(post)
+		await newPost.save()
+
+		res.status(201).json(newPost)
 	} catch (error) {
 		res.status(500).json({ error: error.message })
 	}
 }
-
 
 // update post
 export const deletePost = (req, res) => {
@@ -67,12 +43,9 @@ export const deletePost = (req, res) => {
 		} else {
 			res.status(404).json({ error: 'Post not found' })
 		}
-		
 	} catch (error) {
 		res.status(500).json({ error: error.message })
-	
 	}
 }
 
-// array1 = [2, 3, 4, 1]
-// found = array1.find((i) => i == 4)
+

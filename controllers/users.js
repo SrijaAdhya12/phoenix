@@ -1,25 +1,10 @@
-const users = [
-	{
-		id: '0b1234',
-		name: 'Srija Adhya',
-		age: 20,
-	},
-	{
-		id: '0b1235',
-		name: 'Pritam Kundu',
-		age: 22,
-	},
-	{
-		id: '0b1236',
-		name: 'Elle Shaw',
-		age: 14,
-	},
-]
+import Users from "../models/user.js"
+import mongoose from "mongoose"
 
-export const getUser = (req, res) => {
+export const getUser = async (req, res) => {
 	const { id } = req.params
 	try {
-		const user = users.find((user) => user.id == id)
+		const user = await Users.findById(id)
 		if (user) {
 			res.status(200).json(user)
 		}
@@ -32,9 +17,25 @@ export const getUser = (req, res) => {
 	}
 }
 
-export const getUsers = (req, res) => {
+export const getUsers = async (_, res) => {
 	try {
+		const users = await Users.find()
 		res.status(200).json(users)
+	} catch (error) {
+		res.status(500).json({ error: error.message })
+	}
+}
+
+
+//createUser
+
+export const createUser = async (req, res) => {
+	const user = req.body
+	try {
+		const newUser = new Users(user)
+		await newUser.save()
+
+		res.status(201).json(newUser)
 	} catch (error) {
 		res.status(500).json({ error: error.message })
 	}
