@@ -25,18 +25,7 @@ export const getUsers = async (_, res) => {
 	}
 }
 
-// create User
-export const createUser = async (req, res) => {
-	const user = req.body
-	try {
-		const newUser = new Users(user)
-		await newUser.save()
 
-		res.status(201).json(newUser)
-	} catch (error) {
-		res.status(500).json({ error: error.message })
-	}
-}
 
 // delete user
 export const deleteUser = async (req, res) => {

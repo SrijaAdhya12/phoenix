@@ -1,14 +1,19 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema } from 'mongoose'
 
 const userSchema = Schema(
 	{
 		name: { type: String, required: true },
-        age: { type: Number, min: 18, max: 65},
-        gender: { type: String, enum : ["male" , "female"]
-        }
+		email: {
+			type: String,
+			required: [true, 'Please provide an email'],
+			unique: true,
+			match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Provide a valid email address'],
+        },
+        password: {type:String , required:true},
+		age: { type: Number, min: 18, max: 65 },
+		gender: { type: String, enum: ['male', 'female'] },
 	},
-    { timestamps: true },
-    
+	{ timestamps: true }
 )
 
-export default mongoose.model("users" , userSchema)
+export default mongoose.model('users', userSchema)
