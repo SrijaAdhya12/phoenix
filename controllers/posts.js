@@ -1,4 +1,6 @@
 import Posts from '../models/post.js'
+import mongoose, { Mongoose } from 'mongoose'
+
 
 export const getPost = async (req, res) => {
 	const { id } = req.params
@@ -34,18 +36,29 @@ export const createPost = async (req, res) => {
 }
 
 // update post
-export const deletePost = (req, res) => {
+// export const updatePost = (req, res) => {
+// 	const { id } = req.params
+// 	try {
+// 		const post = Posts.find((post) => post.id == id)
+// 		if (post) {
+// 			res.status(200).json(post)
+// 		} else {
+// 			res.status(404).json({ error: 'Post not found' })
+// 		}
+// 	} catch (error) {
+// 		res.status(500).json({ error: error.message })
+// 	}
+// }
+
+
+// delete post
+
+export const deletePost = async (req, res) => {
 	const { id } = req.params
 	try {
-		const post = posts.find((post) => post.id == id)
-		if (post) {
-			res.status(200).json(post)
-		} else {
-			res.status(404).json({ error: 'Post not found' })
-		}
+		const deletedPost = await Posts.findByIdAndDelete(new mongoose.Types.ObjectId({ id }))
+		res.status(201).json(deletedPost)
 	} catch (error) {
 		res.status(500).json({ error: error.message })
 	}
 }
-
-

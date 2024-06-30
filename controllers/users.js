@@ -1,6 +1,8 @@
 import Users from "../models/user.js"
 import mongoose from "mongoose"
 
+//Find User by id
+
 export const getUser = async (req, res) => {
 	const { id } = req.params
 	try {
@@ -16,6 +18,8 @@ export const getUser = async (req, res) => {
 		
 	}
 }
+
+//Find user
 
 export const getUsers = async (_, res) => {
 	try {
@@ -40,3 +44,15 @@ export const createUser = async (req, res) => {
 		res.status(500).json({ error: error.message })
 	}
 }
+
+//delete user
+
+export const deleteUser = async (req, res) => {
+	const { id } = req.params;
+	try {
+		const deletedUser = await Users.findByIdAndDelete(new mongoose.Types.ObjectId({ id }))
+		res.status(201).json(deletedUser)
+	} catch (error) {
+		res.status(500).json({ error: error.message })
+	}
+ }

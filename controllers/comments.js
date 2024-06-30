@@ -1,58 +1,42 @@
-const comments = [
-	{
-		id: '201',
-		message: 'nice',
-		userId: '0b1235',
-		postId: '100',
-	},
-	{
-		id: '202',
-		message: 'cool',
-		userId: '0b1235',
-		postId: '101',
-	},
-	{
-		id: '203',
-		message: 'beautiful',
-		userId: '0b1235',
-		postId: '102',
-	},
-	{
-		id: '203',
-		message: 'beautiful',
-		userId: '0b1235',
-		postId: '102',
-	},
-	{
-		id: '203',
-		message: 'beautiful',
-		userId: '0b1235',
-		postId: '102',
-	},
-]
+import Comments from "../models/comments.js"
+import mongoose from "mongoose"
 
-export const getComments = (req, res) => {
+//find all comments
+
+export const getComments = async (req, res) => {
 	try {
+		const comments = await Comments.find()
 		res.status(200).json(comments)
 	} catch (error) {
 		res.status(500).json({ error: error.message })
 	}
 }
 
+//find all comments by id
+
+export const getComment = async (req, res) => {
+	const { id } = req.params
+	try {
+		const comment= await Comments.findById(id)
+		if (comment) {
+			res.status(200).json(comment)
+		} else {
+			res.status(404).json({ error: 'Comment not found' })
+		}
+	} catch (error) {
+		res.status(500).json({ error: error.message })
+	}
+}
+
+
 //Create comment
 
-export const createComment = (req, res) => {
+export const createComment = async (req, res) => {
 	const comment = req.body
 	try {
-		const { id, message, userId, postId } = comment
-		const found = comments.find((comment) => comment.id == id)
-		if (found) {
-			res.status(403).json({ error: 'Comment already exits with this id' })
-		} else {
-			comments.push({ id, message, userId, postId })
-			res.status(200).json(comment)
-			
-		}
+		const newComment = new Comments(comment)
+		await newComment.save()
+		res.status(201).json(newComment)
 	} catch (error) {
 		res.status(500).json({ error: error.message })
 	}
