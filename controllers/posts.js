@@ -1,13 +1,11 @@
-import Posts from '../models/post.js'
-import mongoose, { Mongoose } from 'mongoose'
-
+import Posts from '../models/posts.js'
 
 export const getPost = async (req, res) => {
 	const { id } = req.params
 	try {
 		const post = await Posts.findById(id)
 		res.status(200).json(post)
-		}catch (error) {
+	} catch (error) {
 		res.status(500).json({ error: error.message })
 	}
 }
@@ -22,7 +20,6 @@ export const getPosts = async (_, res) => {
 }
 
 //Create Post
-
 export const createPost = async (req, res) => {
 	const post = req.body
 	try {
@@ -35,29 +32,30 @@ export const createPost = async (req, res) => {
 	}
 }
 
-// update post
-// export const updatePost = (req, res) => {
-// 	const { id } = req.params
-// 	try {
-// 		const post = Posts.find((post) => post.id == id)
-// 		if (post) {
-// 			res.status(200).json(post)
-// 		} else {
-// 			res.status(404).json({ error: 'Post not found' })
-// 		}
-// 	} catch (error) {
-// 		res.status(500).json({ error: error.message })
-// 	}
-// }
-
 
 // delete post
-
 export const deletePost = async (req, res) => {
 	const { id } = req.params
 	try {
-		const deletedPost = await Posts.findByIdAndDelete(new mongoose.Types.ObjectId({ id }))
+		const deletedPost = await Posts.findByIdAndDelete(id)
 		res.status(201).json(deletedPost)
+	} catch (error) {
+		res.status(500).json({ error: error.message })
+	}
+}
+
+// update a post
+export const updatePost = async (req, res) => {
+	const { id } = req.params
+	const post = req.body
+	try {
+		const allowedKeys = ['title', 'media']
+		const postKeys = Object.keys(post)
+		if (postKeys.filter((key) => !allowedKeys.includes(key)).length > 0) {
+			return res.status(442).json({ error: 'Invalid fields present in the body' })
+		}
+		await Posts.findByIdAndUpdate(id, post)
+		await getPost(req, res)
 	} catch (error) {
 		res.status(500).json({ error: error.message })
 	}

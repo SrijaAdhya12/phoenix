@@ -1,9 +1,7 @@
-import Comments from "../models/comments.js"
-import mongoose from "mongoose"
+import Comments from '../models/comments.js'
 
-//find all comments
-
-export const getComments = async (req, res) => {
+// find all comments
+export const getComments = async (_, res) => {
 	try {
 		const comments = await Comments.find()
 		res.status(200).json(comments)
@@ -12,25 +10,18 @@ export const getComments = async (req, res) => {
 	}
 }
 
-//find all comments by id
-
-export const getComment = async (req, res) => {
-	const { id } = req.params
+// find all comments by id
+export const getPostComments = async (req, res) => {
+	const { postId } = req.params
 	try {
-		const comment= await Comments.findById(id)
-		if (comment) {
-			res.status(200).json(comment)
-		} else {
-			res.status(404).json({ error: 'Comment not found' })
-		}
+		const comment = await Comments.find({ postId })
+		res.status(200).json(comment)
 	} catch (error) {
 		res.status(500).json({ error: error.message })
 	}
 }
 
-
 //Create comment
-
 export const createComment = async (req, res) => {
 	const comment = req.body
 	try {

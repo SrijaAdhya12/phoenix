@@ -1,10 +1,9 @@
 import express from 'express'
-import { createComment, getComments, getComment } from '../controllers/comments.js'
+import { createComment, getComments, getPostComments } from '../controllers/comments.js'
 
 const router = express.Router()
-router.get('/', getComments)
-router.get('/:id', getComment)
-router.post('/', createComment)
+router.route('/').get(getComments).post(createComment)
+router.route('/:postId').get(getPostComments)
 
 export default router
 
