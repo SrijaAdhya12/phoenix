@@ -54,8 +54,21 @@ export const updatePost = async (req, res) => {
 		if (postKeys.filter((key) => !allowedKeys.includes(key)).length > 0) {
 			return res.status(442).json({ error: 'Invalid fields present in the body' })
 		}
-		await Posts.findByIdAndUpdate(id, post)
-		await getPost(req, res)
+		const updatedPost = await Posts.findByIdAndUpdate(id, post, { new: true })
+		res.status(200).json(updatedPost)
+	} catch (error) {
+		res.status(500).json({ error: error.message })
+	}
+}
+
+// Replace a post
+export const replacePost = async (req, res) => {
+	const { id } = req.params
+	const post = req.body
+	try {
+		await Posts.findByIdAndDelete(id)
+		const replacedPost = await Posts.findByIdAndUpdate(id, post, {upsert: true, new: true})
+		res.status(200).json(replacedPost)
 	} catch (error) {
 		res.status(500).json({ error: error.message })
 	}
