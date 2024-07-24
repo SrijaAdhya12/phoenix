@@ -2,7 +2,7 @@
 
 <div align=center>
     <a href="https://github.com/SrijaAdhya12/phoenix">
-        <img width="200" src="https://img.icons8.com/?size=100&id=BDsNbX8bD76-&format=png&color=000000">
+        <img width="200" src="https://img.icons8.com/?size=100&id=66751&format=png&color=000000">
     </a>
     <p style="font-family: roboto, calibri; font-size:12pt; font-style:italic"> A social media site </p>
     <a src="https://github.com/SrijaAdhya12/phoenix/forks">
@@ -71,7 +71,8 @@ $> npm start   # run the backEnd
 
 ## Preview
 
-# ![VirtualR](https://github.com/user-attachments/assets/4116093c-5207-49cd-9fd2-3fa645ab01b2)
+# ![Phoenix](https://github.com/user-attachments/assets/81b1e803-9e64-45aa-9eba-44c9664eb27e)
+
 
 
 ![line]
