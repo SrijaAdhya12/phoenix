@@ -20,7 +20,6 @@
 - [Tech Stack Used](#tech-stack-used)
 - [Preview](#preview)
 - [Best Contributors](#best-contributors)
-- [License](#License)
 
 ![line]
 
@@ -87,11 +86,7 @@ $> npm start   # run the backEnd
 
 ![line]
 
-## License
-
-- See [LICENSE]
-
-**Srija, 2024**
+**<img width="10" src="https://img.icons8.com/?size=100&id=DbZhJARl07o2&format=png&color=000000"> Srija, 2024** 
 
 ![line]
 
