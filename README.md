@@ -2,7 +2,7 @@
 
 <div align=center>
     <a href="https://github.com/SrijaAdhya12/phoenix">
-        <img width="200" src="https://img.icons8.com/?size=100&id=66751&format=png&color=000000">
+        <img width="200" src="https://cdn-icons-png.flaticon.com/512/4553/4553011.png" alt="phoenix">
     </a>
     <p style="font-family: roboto, calibri; font-size:12pt; font-style:italic"> A social media site </p>
     <a src="https://github.com/SrijaAdhya12/phoenix/forks">
@@ -10,6 +10,7 @@
     </a>
 </div>
 
+## [Phoenix](https://phoenix-client-social.vercel.app)
 
 ![line]
 
