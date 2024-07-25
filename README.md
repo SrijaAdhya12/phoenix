@@ -87,7 +87,14 @@ $> npm start   # run the backEnd
 
 ![line]
 
-**<img width="10" src="https://img.icons8.com/?size=100&id=DbZhJARl07o2&format=png&color=000000"> Srija, 2024** 
+## License
+
+-   see [LICENSE]
+
+**Srija, 2024**
+
+[license]: https://github.com/SrijaAdhya12/phoenix/blob/main/LICENSE
+
 
 ![line]
 
