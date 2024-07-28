@@ -10,7 +10,7 @@
     </a>
 </div>
 
-## [Phoenix](https://phoenix-client-social.vercel.app)
+# [Phoenix](https://phoenix-client-social.vercel.app)
 
 ![line]
 
